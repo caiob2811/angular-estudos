@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="X-UA-Compatible" content="IE-edge"> <!--caso não coloque esses metas, nenhum dos componentes do angular vai funcionar.-->
+    <meta http-equiv="Content-type" content="text/html; charset= UTF-8"> <!--caso não coloque esses metas, nenhum dos componentes do angular vai funcionar.-->
+    <title>Angular</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+<body class="container" ng-app="app"> <!--referenciando o app.js.-->
+    <div class="header-inner">
+        <h1 style="text-align: center; color: blue;"> 
+            Bem Vindo ao Curso de Desenvolvimento WEB com Angular JS
+        </h1>
+    </div>
+    <div ng-controller="PrimeiroController" class="well"> <!--cria o controller e um arquivo pra ele.-->
+        Olá, {{mensagem}} seja bem vindo! <!--duplas chaves no angular significa que ele vai procurar uma variável $scope.-->
+        <div ng-class='{"panel-primary": iniciado, "panel-danger": !iniciado}'> <!--aplica uma classe css a um template.-->
+            <div class="panel-heading">
+                <h3 class="panel-title">Situação do curso</h3>
+            </div>
+                <div class="panel-body">
+                    <p ng-show="iniciado">Curso em Andamento!</p>
+                    <p ng-hide="iniciado">Curso Finalizado!</p>
+                    <p ng-if="!iniciado">Aguarde o próximo curso!</p>
+            <br> <br>
+            <li ng-repeat="aluno in alunos"> <!--vai ficar repetindo os alunos.-->
+            {{aluno}}
+        </li>
+        <br>
+        <button ng-show="iniciado" ng-click="finalizar()" class="btn-danger">Finalizar</button>  <!--cria um evento no click, quando clicar acontecerá algo.-->
+        <button ng-hide="iniciado" ng-click="iniciar()" class="btn-success">Iniciar</button>
+    </div> 
+    <div class="container-fluid container-fixed-lg footer">
+        <div class="copyright sm-text-center">
+            <p class="small no-margin pull-left sm-pull-reset">
+               <span class="hint text">Copyright © 2024</span>
+            </p>
+        </div>
+    </div>
+    <script src="scripts/libs/angular.js"></script>
+    <script src="scripts\app.js"></script>
+    <script src="scripts\primeiro-controller.js"></script>
+</body>
+</html>
