@@ -22,11 +22,36 @@
                     <p ng-show="iniciado">Curso em Andamento!</p>
                     <p ng-hide="iniciado">Curso Finalizado!</p>
                     <p ng-if="!iniciado">Aguarde o próximo curso!</p>
-            <br> <br>
-            <li ng-repeat="aluno in alunos"> <!--vai ficar repetindo os alunos.-->
-            {{aluno}}
-        </li>
-        <br>
+                    <p>Preço do curso: {{valor | currency : 'R$'}}</p> <!--currency = valor da moeda.-->
+                    <p>Última atualização: {{hoje | date : 'dd/MM/yyyy'}}</p>
+                </div>
+        </div>
+        <div>
+            <label>Definir Preço</label>
+            <input type="number" id="valor" name="valor" ng-model="valor">
+        </div>
+        <h3>Alunos Cadastrados</h3>
+        <div>
+            <label>Filtrar por nome</label>
+            <input type="text" ng-model="filtro">
+        </div>
+        <div class="table-responsive">
+            <table class=" table table-striped">
+            <tr>
+                <th ng-click="ordenarPorNome()">
+                    Nome
+                </th>
+                <th ng-click="ordenarPorIdade()">
+                    Idade
+                </th>
+            </tr>
+            <tr ng-repeat="aluno in alunos | filter : filtro">
+                <td>{{aluno.nome}}</td>
+                <td>{{aluno.idade}}</td>
+            </tr>
+        </div>
+    </table>
+</div>
         <button ng-show="iniciado" ng-click="finalizar()" class="btn-danger">Finalizar</button>  <!--cria um evento no click, quando clicar acontecerá algo.-->
         <button ng-hide="iniciado" ng-click="iniciar()" class="btn-success">Iniciar</button>
         <h3>Nova Inscrição no curso</h3>
@@ -36,6 +61,12 @@
                     <div class="form-group form-group-default">
                         <label>Nome</label>
                         <input class="form-control" type="text" id="nome_aluno" name="nome_aluno" ng-model="nome_aluno" ng-readonly="!iniciado" ng-minlength="3"> <!--model referencia uma variável do scope.-->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group-default">
+                        <label>Idade</label>
+                        <input class="form-control" type="number" id="idade_aluno" ng-model="idade_aluno">
                     </div>
                 </div>
             </div>

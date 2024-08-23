@@ -4,7 +4,15 @@ angular.module('app').controller('PrimeiroController', function ($scope) { //sco
 
     $scope.iniciado = true // elemento de ligação entre o controle e a view.
 
-    $scope.alunos = ['Aluno 1','Aluno 2', 'Aluno 3', 'Aluno 4'];
+    $scope.alunos = [{'nome': 'Joãozinho', 'idade': 9},
+        {'nome': 'Ricardinho', 'idade': 11},
+        {'nome': 'Felipinho', 'idade': 11},
+        {'nome': 'Zildinha', 'idade': 14},
+        {'nome': 'Marianinha', 'idade': 10},
+        {'nome': 'Luluzinha', 'idade': 12}];
+
+
+    $scope.hoje = new Date();
 
     $scope.finalizar = function() {
         $scope.iniciado = false
@@ -14,11 +22,24 @@ angular.module('app').controller('PrimeiroController', function ($scope) { //sco
         $scope.iniciado = true
     }
 
-    $scope.submeter = function () {
-        if($scope.form_1.$valid) { // se o formm_1 for valido, adiciona o nome no array alunos.
-            $scope.alunos.push($scope.nome_aluno)
+    $scope.ordenarPorNome = function() {
+        $scope.ordenadoPorNome = !$scope.ordenadoPorNome
+        $scope.alunos = $filter('orderBy')($scope.alunos, 'nome', $scope.ordenardoPorNome)
+    }
+
+    $scope.ordenarPorIdade = function() {
+        $scope.ordenadoPorIdade = !$scope.ordenadoPorIdade
+        $scope.alunos = $filter('orderBy')($scope.alunos, 'idade', $scope.ordenadoPorIdade)
+    }
+
+    $scope.submeter = function() {
+        if($scope.novo_aluno_form.$valid) {
+            novo_aluno = {};
+            novo_aluno['nome'] = $scope.nome_aluno;
+            novo_aluno['idade'] = parseInt($scope.idade_aluno);
+            $scope.alunos.push(novo_aluno);
         } else {
-            alert('Preencha o campo corretamente!')
+            alert("Preencha o formulário corretamente");
         }
     }
-});
+})
