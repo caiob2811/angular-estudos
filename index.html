@@ -29,6 +29,22 @@
         <br>
         <button ng-show="iniciado" ng-click="finalizar()" class="btn-danger">Finalizar</button>  <!--cria um evento no click, quando clicar acontecerá algo.-->
         <button ng-hide="iniciado" ng-click="iniciar()" class="btn-success">Iniciar</button>
+        <h3>Nova Inscrição no curso</h3>
+        <form name="form_1">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group form-group-default">
+                        <label>Nome</label>
+                        <input class="form-control" type="text" id="nome_aluno" name="nome_aluno" ng-model="nome_aluno" ng-readonly="!iniciado" ng-minlength="3"> <!--model referencia uma variável do scope.-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <button ng-click="submeter()" class="btn-primary" ng-disabled="!iniciado">Adicionar</button>
+                </div>
+            </div>
+        </form>
     </div> 
     <div class="container-fluid container-fixed-lg footer">
         <div class="copyright sm-text-center">
