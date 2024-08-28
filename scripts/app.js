@@ -22,5 +22,4 @@ var app = angular.module('app', ['ngResource', 'ui.router']) // agora qualquer c
 
     app.run(function($rootScope, $state) { // é a função chamada quando o angular inicia um aplicação.
         $state.go('aplicação_inicial') //estado vai para...
-        $rootScope.mensagem = "Olá, seja bem vindo!"
     })
