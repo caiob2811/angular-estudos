@@ -1,0 +1,46 @@
+<div ng-controller="ListagemAlunosController" class="well"> <!--cria o controller e um arquivo pra ele.-->
+    Olá, {{mensagem}} seja bem vindo! <!--duplas chaves no angular significa que ele vai procurar uma variável $scope.-->
+    <div ng-class='{"panel-primary": iniciado, "panel-danger": !iniciado}'> <!--aplica uma classe css a um template.-->
+        <div class="panel-heading">
+            <h3 class="panel-title">Situação do curso</h3>
+        </div>
+            <div class="panel-body">
+                <p ng-show="iniciado">Curso em Andamento!</p>
+                <p ng-hide="iniciado">Curso Finalizado!</p>
+                <p ng-if="!iniciado">Aguarde o próximo curso!</p>
+                <p>Preço do curso: {{valor | currency : 'R$'}}</p> <!--currency = valor da moeda.-->
+                <p>Última atualização: {{hoje | date : 'dd/MM/yyyy'}}</p>
+            </div>
+    </div>
+    <div>
+        <label>Definir Preço</label>
+        <input type="number" id="valor" name="valor" ng-model="valor">
+    </div>
+    <h3>Alunos Cadastrados</h3>
+    <div>
+        <label>Filtrar por nome</label>
+        <input type="text" ng-model="filtro">
+    </div>
+    <div class="table-responsive">
+        <table class=" table table-striped">
+            <tr>
+                <th ng-click="ordenarPorNome()">
+                Nome
+                </th>
+                <th ng-click="ordenarPorIdade()">
+                Idade
+                </th>
+            </tr>
+            <tr tr ng-repeat="aluno in alunos | filter : filtro">
+                <td>{{aluno.nome}}</td>
+                <td>{{aluno.idade}}</td>
+            </tr> 
+        </table>
+    </div>
+    <button ng-show="iniciado" ng-click="finalizar()" class="btn-danger">
+        Finalizar
+    </button>  <!--cria um evento no click, quando clicar acontecerá algo.-->
+    <button ng-hide="iniciado" ng-click="iniciar()" class="btn-success">
+        Iniciar
+    </button>
+</div>
